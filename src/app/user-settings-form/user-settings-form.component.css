@@ -1,0 +1,12 @@
+/*
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid red;
+}
+.ng-valid:not(form) {
+  border: 1px solid green;
+}
+*/
+
+.field-error {
+  border: 1px solid red;
+}

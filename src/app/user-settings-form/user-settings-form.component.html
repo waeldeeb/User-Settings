@@ -1,0 +1,132 @@
+<div class="container">
+  <h2>User Settings</h2>
+<!-- use ngNativeValidate in case to handle error direct on each action -->
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" name="name" class="form-control"
+           [(ngModel)]="userSettings.name" required #nameField="ngModel"
+           (blur)="onBlur(nameField)"
+           [class.field-error]="form.submitted && nameField.invalid">
+<div [hidden]="!form.submitted || nameField.valid"
+class="alert alert-danger">
+Enter a name
+</div>
+
+
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="text"
+             placeholder="Start Date"
+             class="form-control"
+             [(ngModel)]="startDate" name="startDate" id="startDate"
+             bsDatepicker>
+    </div>
+    Start Date: {{startDate}}
+
+
+
+    <br>
+    <button type="button" class="btn btn-primary" name="singleModel"
+            [(ngModel)]="singleModel" btnCheckbox
+            btnCheckboxTrue="on" btnCheckboxFalse="off">
+      {{singleModel}}
+    </button>
+
+   <!-- use ngNativeValidate in case to handle error direct on each action
+
+    <div [hidden]="nameField.valid || nameField.untouched"
+    class="alert alert-danger">
+  Enter a name
+    </div>
+-->
+  </div>
+<!-- Debugging-->
+  <h3>{{nameField.untouched}}</h3>
+  <div class="form-check form-group">
+    <input class="form-check-input" type="checkbox" id="emailoffers"
+           name="emailoffers" [(ngModel)]="userSettings.emailOffers">
+    <label class="form-check-label" for="emailoffers">
+      Email Special Offers
+    </label>
+  </div>
+  <P><U>User Interface Style</U></P>
+  <div class="btn-group">
+    <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle"
+           name="interfaceStyle"
+           btnRadio="Light" tabindex="0" role="button">Light</label>
+    <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle"
+           name="interfaceStyle"
+           btnRadio="Medium" tabindex="0" role="button">Medium</label>
+    <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle"
+           name="interfaceStyle"
+           btnRadio="Dark" tabindex="0" role="button">Dark</label>
+  </div>
+  <!--
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="interface"
+           id="lightInterface" value="light"
+           [(ngModel)]="userSettings.interfaceStyle">
+    <label class="form-check-label" for="lightInterface">
+Light
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="interface"
+           id="mediumInterface" value="medium"
+           [(ngModel)]="userSettings.interfaceStyle">
+    <label class="form-check-label" for="mediumInterface">
+Medium
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="interface"
+           id="darkInterface" value="dark"
+           [(ngModel)]="userSettings.interfaceStyle">
+    <label class="form-check-label" for="darkInterface">
+Dark
+    </label>
+  </div>
+  -->
+<div class="form-group">
+  <label for="subscriptionType">Subscription Type</label>
+  <select class="form-control" id="subscriptionType" name="subscriptionType"
+          [(ngModel)]="userSettings.subscriptionType">
+    <option>Monthly</option>
+    <option>Annual</option>
+    <option>Lifetime</option>
+  </select>
+</div>
+
+  <div class="form-group">
+    <label for="notes">Notes</label>
+    <textarea name="notes" id="notes"
+              class="form-control" rows="3"
+              [(ngModel)]="userSettings.notes"></textarea>
+  </div>
+<!--
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="testing">Testing</label>
+    <input type="date" id="testing" name="testing" class="form-control" />
+  </div>
+-->
+  <div [hidden]="!postError"
+  class="alert alert-danger">
+    {{postErrorMessage}}
+
+  </div>
+  <button class="btn btn-primary">Send</button>
+
+</form>
+
+</div>
+
+{{ userSettings | json }}
+<br>
+{{ originalUserSettings | json }}
+<br>
